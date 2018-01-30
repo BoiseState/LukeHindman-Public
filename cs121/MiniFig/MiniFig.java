@@ -14,6 +14,9 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class MiniFig extends JPanel
 {
+	
+	private final int DEFAULT_HEIGHT = 450;
+	private final int DEFAULT_WIDTH = 300;
 	/**
 	 * Draws the picture in the panel. This is where all of your
 	 * code will go.
@@ -34,31 +37,38 @@ public class MiniFig extends JPanel
 		int mid = getWidth() / 2;
 		int top = 50;
 		
+		double scaleFactor = Math.min(getWidth()/(double)DEFAULT_WIDTH,getHeight()/(double)DEFAULT_HEIGHT );
+		
 		/* Set the background color */
 		page.setColor(backgroundColor);
 		page.fillRect(0, 0, getWidth(), getHeight());
 		
 		/* Head */
-		int knobWidth = 40;
-		int knobHeight = 16;
+		int knobWidth = (int) (40 * scaleFactor);
+		int knobHeight = (int) (16 * scaleFactor);
+		int knobHeightPadded = knobHeight + 2; // extend knob below head to hide curved border
 		int knobXOffset = mid - knobWidth / 2;
 		int knobYOffset = top;
+		int knobCurve = Math.min(5, (int) (5 * scaleFactor));
 		page.setColor(headColor);
-		page.fillRoundRect(knobXOffset,knobYOffset,knobWidth,knobHeight+2,5,5); //head knob
+		page.fillRoundRect(knobXOffset,knobYOffset,knobWidth,knobHeightPadded,knobCurve,knobCurve); //head knob
 		page.setColor(Color.BLACK);
-		page.drawRoundRect(knobXOffset,knobYOffset,knobWidth,knobHeight+2,5,5); //head knob
+		page.drawRoundRect(knobXOffset,knobYOffset,knobWidth,knobHeightPadded,knobCurve,knobCurve); //head knob
 		
-		int headWidth = 84;
-		int headHeight = 75;
+		System.out.println("knob width,height: " + knobWidth + "," + knobHeight); 
+		
+		int headWidth = (int) (84 * scaleFactor);
+		int headHeight = (int) (75 * scaleFactor);
 		int headXOffset = mid - headWidth / 2;
 		int headYOffset = top + knobHeight;
+		int headCurve = Math.min(28, (int) (28 * scaleFactor));
 		page.setColor(headColor);
-		page.fillRoundRect(headXOffset,headYOffset,headWidth,headHeight,28,28); //head
+		page.fillRoundRect(headXOffset,headYOffset,headWidth,headHeight,headCurve,headCurve); //head
 		page.setColor(Color.BLACK);
-		page.drawRoundRect(headXOffset,headYOffset,headWidth,headHeight,25,28); //head
+		page.drawRoundRect(headXOffset,headYOffset,headWidth,headHeight,headCurve,headCurve); //head
 		
-		int neckWidth = 54;
-		int neckHeight = 10;
+		int neckWidth = (int) (54 * scaleFactor);
+		int neckHeight = (int) (10 * scaleFactor);
 		int neckXOffset = mid - neckWidth / 2;
 		int neckYOffset = headYOffset + headHeight;
 		page.setColor(headColor);
@@ -66,26 +76,26 @@ public class MiniFig extends JPanel
 		page.setColor(Color.BLACK);
 		page.drawRect(neckXOffset,neckYOffset,neckWidth,neckHeight); //neck
 		
-		int eyeSpacing = 30;
-		int eyeDiameter = 10;
-		int distFromTopOfHead = 28; 
+		int eyeSpacing = (int) (30 * scaleFactor);
+		int eyeDiameter = (int) (10 * scaleFactor);
+		int distFromTopOfHead = (int) (28 * scaleFactor); 
 		int leftEyeXOffset = mid - (eyeSpacing / 2 + eyeDiameter / 2);
 		int rightEyeXOffset = mid + (eyeSpacing / 2 - eyeDiameter / 2);
 		int EyeYOffset = headYOffset + distFromTopOfHead;
 		page.fillOval(leftEyeXOffset, EyeYOffset, eyeDiameter, eyeDiameter); // right eye
 		page.fillOval(rightEyeXOffset, EyeYOffset, eyeDiameter, eyeDiameter); // left eye
 		
-		int mouthOvalDiameter = 40;
-		int mountDistFromTopOfHead = 18;
+		int mouthOvalDiameter = (int) (40 * scaleFactor);
+		int mountDistFromTopOfHead = (int) (18 * scaleFactor);
 		int mouthXOffset = mid - mouthOvalDiameter / 2;
 		int mouthYOffset = headYOffset + mountDistFromTopOfHead;
 		page.drawArc(mouthXOffset,mouthYOffset,mouthOvalDiameter,mouthOvalDiameter,225,90); // mouth
 		
 		/* Torso */
 		Polygon torso = new Polygon();
-		int torsoShoulderWidth = 90;
-		int torsoWaistWidth = 130;
-		int torsoHeight = 114;
+		int torsoShoulderWidth = (int) (90 * scaleFactor);
+		int torsoWaistWidth = (int) (130 * scaleFactor);
+		int torsoHeight = (int) (114 * scaleFactor);
 		int torsoShoulderYOffset = neckYOffset + neckHeight;
 		int torsoWaistYOffset = neckYOffset + neckHeight + torsoHeight;
 		torso.addPoint(mid - torsoShoulderWidth / 2, torsoShoulderYOffset ); //right shoulder point
@@ -94,8 +104,8 @@ public class MiniFig extends JPanel
 		torso.addPoint(mid - torsoWaistWidth / 2, torsoWaistYOffset ); //right waist point
 
 		
-		int beltWidth = 120;
-		int beltHeight = 20;
+		int beltWidth = (int) (120 * scaleFactor);
+		int beltHeight = (int) (20 * scaleFactor);
 		int beltXOffset = mid - beltWidth/2;
 		int beltYOffset = torsoWaistYOffset;
 		page.setColor(beltColor);
@@ -103,9 +113,10 @@ public class MiniFig extends JPanel
 		
 
 		/* Legs */
-		int lowerLegWidth = 60;
-		int legSpacing = 10;
-		int legLength = 94;
+		int lowerLegWidth = (int) (60 * scaleFactor);
+		int legSpacing = (int) (10 * scaleFactor);
+		int legLength = (int) (94 * scaleFactor);
+		int footHeight = (int) (28 * scaleFactor);
 		int upperLegYOffset = beltYOffset + beltHeight;
 		int lowerLegYOffset = upperLegYOffset + legLength;
 		
@@ -125,11 +136,10 @@ public class MiniFig extends JPanel
 		int rightFootXOffset = rightLegLowerXOffset;
 		int rightFootYOffset = lowerLegYOffset;
 		int rightFootWidth = lowerLegWidth;
-		int rightFootHeight = 28;
 		page.setColor(footColor);
-		page.fillRect(rightFootXOffset, rightFootYOffset, rightFootWidth, rightFootHeight); // right foot
+		page.fillRect(rightFootXOffset, rightFootYOffset, rightFootWidth, footHeight); // right foot
 		page.setColor(Color.BLACK);
-		page.drawRect(rightFootXOffset, rightFootYOffset, rightFootWidth, rightFootHeight); // right foot
+		page.drawRect(rightFootXOffset, rightFootYOffset, rightFootWidth, footHeight); // right foot
 		
 		Polygon leftLeg = new Polygon();
 		int leftLegXOffset = mid + beltWidth/2;
@@ -147,14 +157,13 @@ public class MiniFig extends JPanel
 		int leftFootXOffset = leftLegInseamXOffset;
 		int leftFootYOffset = lowerLegYOffset;
 		int leftFootWidth = lowerLegWidth;
-		int leftFootHeight = 28;
 		page.setColor(footColor);
-		page.fillRect(leftFootXOffset, leftFootYOffset, leftFootWidth, leftFootHeight); // left foot
+		page.fillRect(leftFootXOffset, leftFootYOffset, leftFootWidth, footHeight); // left foot
 		page.setColor(Color.BLACK);
-		page.drawRect(leftFootXOffset, leftFootYOffset, leftFootWidth, leftFootHeight); // left foot
+		page.drawRect(leftFootXOffset, leftFootYOffset, leftFootWidth, footHeight); // left foot
 		
-		int legDividerWidth = 12;
-		int legDividerHeight = 54;
+		int legDividerWidth = (int) (12 * scaleFactor);
+		int legDividerHeight = (int) (54 * scaleFactor);
 		int legDividerXOffset = mid - legDividerWidth / 2;
 		int legDividerYOffset = beltYOffset + beltHeight;
 		page.setColor(footColor);
@@ -163,23 +172,22 @@ public class MiniFig extends JPanel
 		page.drawRect(legDividerXOffset, legDividerYOffset, legDividerWidth, legDividerHeight);
 		
 		/* Arms */
-		int armUpperWidth = 31;
-		final double armShoulderRatio = 0.64;
-		int armUpperHeight = (int) (armUpperWidth * armShoulderRatio); 
-		int armCuffWidth = 35;
+		int armUpperWidth = (int) (31 * scaleFactor);
+		int armUpperHeight = (int) (20 * scaleFactor); 
+		int armCuffWidth = (int) (35 * scaleFactor);
 		
-		int armShoulderYOffset = torsoShoulderYOffset+8;
-		int armElbowYOffset = armShoulderYOffset + 58;
-		int armUpperCuffYOffset = armElbowYOffset + 34;
-		int armLowerCuffYOffset = armElbowYOffset + 38;
+		int armShoulderYOffset = torsoShoulderYOffset+ (int) (8 * scaleFactor);
+		int armElbowYOffset = armShoulderYOffset + (int) (58 * scaleFactor);
+		int armUpperCuffYOffset = armElbowYOffset + (int) (34 * scaleFactor);
+		int armLowerCuffYOffset = armElbowYOffset + (int) (38 * scaleFactor);
 		
 		Point rightArmAnchor = new Point(mid - (torsoShoulderWidth / 2 + armUpperWidth ),
 				armShoulderYOffset);
-		Point rightArmSleeve = new Point(rightArmAnchor.x - 2,
-				rightArmAnchor.y + armUpperHeight - 2);
-		Point rightArmElbow = new Point(rightArmAnchor.x - 18, 
+		Point rightArmSleeve = new Point(rightArmAnchor.x - (int) (2 * scaleFactor),
+				rightArmAnchor.y + armUpperHeight - (int) (2 * scaleFactor));
+		Point rightArmElbow = new Point(rightArmAnchor.x - (int) (18 * scaleFactor), 
 				armElbowYOffset);
-		Point rightArmCuffOuter = new Point(rightArmAnchor.x - 24, 
+		Point rightArmCuffOuter = new Point(rightArmAnchor.x - (int) (24 * scaleFactor), 
 				armUpperCuffYOffset);
 		Point rightArmCuffInner = new Point(rightArmCuffOuter.x + armCuffWidth,
 				armLowerCuffYOffset);
@@ -206,13 +214,13 @@ public class MiniFig extends JPanel
 
 		Point leftArmAnchor = new Point(mid + (torsoShoulderWidth / 2 - armUpperWidth),
 				armShoulderYOffset);
-		Point leftArmSleeve = new Point(leftArmAnchor.x  + armUpperWidth * 2 + 2,
-				leftArmAnchor.y + armUpperHeight - 2 );
-		Point leftArmElbow = new Point(leftArmAnchor.x + armUpperWidth*2 + 18, 
+		Point leftArmSleeve = new Point(leftArmAnchor.x  + armUpperWidth * 2 + (int) (2 * scaleFactor),
+				leftArmAnchor.y + armUpperHeight - (int) (2 * scaleFactor) );
+		Point leftArmElbow = new Point(leftArmAnchor.x + armUpperWidth*2 + (int) (18 * scaleFactor), 
 				armElbowYOffset);
-		Point leftArmCuffOuter = new Point(leftArmAnchor.x + armUpperWidth*2 + 24,
+		Point leftArmCuffOuter = new Point(leftArmAnchor.x + armUpperWidth*2 + (int) (24 * scaleFactor),
 				armUpperCuffYOffset);
-		Point leftArmCuffInner = new Point(leftArmAnchor.x + armUpperWidth + 20,
+		Point leftArmCuffInner = new Point(leftArmAnchor.x + armUpperWidth + (int) (20 * scaleFactor),
 				armLowerCuffYOffset);
 		Point leftArmPit = new Point(leftArmAnchor.x + armUpperWidth, 
 				leftArmAnchor.y);
@@ -240,7 +248,7 @@ public class MiniFig extends JPanel
 		
 		
 		/* Draw Wrist and Hands */
-		int wristLength = 15;
+		int wristLength = (int) (15 * scaleFactor);
 		// Calculate width of cuff using Pathagorian Theorem */
 		double cuffWidth = Math.sqrt( Math.pow(Math.abs(rightArmCuffOuter.x - rightArmCuffInner.x),2) +
 				Math.pow(Math.abs(rightArmCuffOuter.y - rightArmCuffInner.y),2));
@@ -318,11 +326,11 @@ public class MiniFig extends JPanel
 		page.setColor(Color.BLACK);
 		page.drawPolygon(leftWrist);
 		
-		int handDiameter = 45;
-		int handHoleDiameter = 30;
+		int handDiameter = (int) (45 * scaleFactor);
+		int handHoleDiameter = (int) (30 * scaleFactor);
 		//Left hand
-		int leftHandXShift = -30;
-		int leftHandYShift = -1;
+		int leftHandXShift = (int) (-30 * scaleFactor);
+		int leftHandYShift = (int) (-1 * scaleFactor);
 		page.setColor(handColor);
 		page.fillArc(leftWristHandOuter.x + leftHandXShift, leftWristHandOuter.y + leftHandYShift, handDiameter, handDiameter,-45,290);
 		page.setColor(Color.BLACK);
@@ -333,8 +341,8 @@ public class MiniFig extends JPanel
 		page.drawArc(leftWristHandOuter.x + leftHandXShift + ((handDiameter - handHoleDiameter) / 2), leftWristHandOuter.y + leftHandYShift + ((handDiameter - handHoleDiameter) / 2), handHoleDiameter, handHoleDiameter,-45,290);
 		
 		//Right Hand
-		int rightHandXShift = -16;
-		int rightHandYShift = -1;
+		int rightHandXShift = (int) (-16 * scaleFactor);
+		int rightHandYShift = (int) (-1 * scaleFactor);
 		page.setColor(handColor);
 		page.fillArc(rightWristHandOuter.x +rightHandXShift, rightWristHandOuter.y + rightHandYShift, handDiameter, handDiameter,-60,290);
 		page.setColor(Color.BLACK);
@@ -354,7 +362,7 @@ public class MiniFig extends JPanel
 	public MiniFig()
 	{
 		this.setBackground(Color.white);
-		this.setPreferredSize(new Dimension(300, 450));
+		this.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 	}
 
 
