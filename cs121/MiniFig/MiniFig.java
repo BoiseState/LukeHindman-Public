@@ -606,6 +606,13 @@ public class MiniFig
 		return totalWidth;
 	}
 	
+	/**
+	 * @return a point along the middle axis of the MiniFig at the base
+	 */
+	public Point getBaseMidPoint() {
+		return new Point(this.mid,this.leftInnerAnkle.y + this.footHeight);
+	}
+	
 	
 
 

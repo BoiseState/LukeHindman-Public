@@ -54,6 +54,12 @@ public class MiniFigScalableDriver extends JPanel
 		/* Draw the MiniFig */
 		bob.draw();
 		
+		/* Draw some grass for the MiniFig to stand on */
+		int figBaseYOffset = bob.getBaseMidPoint().y;
+		Color grassGreen = new Color (60,80,38);
+		page.setColor(grassGreen);
+		page.fillRect(0, figBaseYOffset, getWidth(), getHeight() - figBaseYOffset );
+		
 		
 		
 

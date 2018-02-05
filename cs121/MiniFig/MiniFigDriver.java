@@ -39,6 +39,12 @@ public class MiniFigDriver extends JPanel
 		/* Draw a box around MiniFig to test height and width */
 		page.drawRect(mid - bob.getWidth()/2, top, bob.getWidth(), bob.getHeight());
 		
+		/* Draw some grass for the MiniFig to stand on */
+		int figBaseYOffset = bob.getBaseMidPoint().y;
+		Color grassGreen = new Color (60,80,38);
+		page.setColor(grassGreen);
+		page.fillRect(0, figBaseYOffset, getWidth(), getHeight() - figBaseYOffset );
+		
 	}
 
 
