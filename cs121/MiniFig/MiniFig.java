@@ -21,7 +21,7 @@ public class MiniFig
 	private double scaleFactor; //Scaler used to updated MiniFig dimensions
 	
 	/* Color attributes for the MiniFig */
-	private Color headColor, torsoColor, beltColor, legColor, footColor, armColor, handColor, handHoleColor;
+	private Color headColor, eyeColor, torsoColor, beltColor, legColor, footColor, armColor, handColor, handHoleColor;
 
 	/* Attributes for MiniFig Head */
 	private int knobWidth, knobHeight, knobCurve;
@@ -89,6 +89,7 @@ public class MiniFig
 	private void initializeColors() {
 		/* Define colors for each of the MiniFig components */
 		headColor = new Color(255,227,48);
+		eyeColor = Color.BLACK;
 		torsoColor = new Color(7,60,145);
 		beltColor = new Color (104,3,33);
 		legColor = Color.BLACK;
@@ -323,8 +324,10 @@ public class MiniFig
 		canvas.fillRoundRect(faceAnchor.x,faceAnchor.y,faceWidth,faceHeight,faceCurve,faceCurve); //head
 		canvas.setColor(Color.BLACK);
 		canvas.drawRoundRect(faceAnchor.x,faceAnchor.y,faceWidth,faceHeight,faceCurve,faceCurve); //head
+		canvas.setColor(eyeColor);
 		canvas.fillOval(leftEyeXOffset, EyeYOffset, eyeDiameter, eyeDiameter); // right eye
 		canvas.fillOval(rightEyeXOffset, EyeYOffset, eyeDiameter, eyeDiameter); // left eye
+		canvas.setColor(Color.BLACK);
 		canvas.drawArc(mouthXOffset,mouthYOffset,mouthOvalDiameter,mouthOvalDiameter,225,90); // mouth
 		
 		// Draw the neck component on the canvas
@@ -554,12 +557,19 @@ public class MiniFig
 	public void setHandHoleColor(Color handHoleColor) {
 		this.handHoleColor = handHoleColor;
 	}
+	
+	/**
+	 * @param eyeColor the eyeColor to set
+	 */
+	public void setEyeColor(Color eyeColor) {
+		this.eyeColor = eyeColor;
+	}
 
 	/**
 	 * @return the capPoint
 	 */
 	public Point getCapPoint() {
-		return faceAnchor;
+		return new Point(this.mid, this.top + this.knobHeight);
 	}
 	
 	/**
@@ -579,14 +589,14 @@ public class MiniFig
 	/**
 	 * @return the rightShoulder
 	 */
-	public Point getRightShoulder() {
+	public Point getRightShoulderPoint() {
 		return rightShoulder;
 	}
 
 	/**
 	 * @return the leftShoulder
 	 */
-	public Point getLeftShoulder() {
+	public Point getLeftShoulderPoint() {
 		return leftShoulder;
 	}
 	
@@ -611,6 +621,20 @@ public class MiniFig
 	 */
 	public Point getBaseMidPoint() {
 		return new Point(this.mid,this.leftInnerAnkle.y + this.footHeight);
+	}
+	
+	/**
+	 * @return the height of the MiniFig face
+	 */
+	public int getFaceHeight() {
+		return this.faceHeight;
+	}
+	
+	/**
+	 * @return the width of the MiniFig face
+	 */
+	public int getFaceWidth() {
+		return this.faceWidth;
 	}
 	
 	
