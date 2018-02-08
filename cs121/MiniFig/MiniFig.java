@@ -21,7 +21,7 @@ public class MiniFig
 	private double scaleFactor; //Scaler used to updated MiniFig dimensions
 	
 	/* Color attributes for the MiniFig */
-	private Color headColor, eyeColor, torsoColor, beltColor, legColor, footColor, armColor, handColor, handHoleColor;
+	private Color headColor, eyeColor, torsoColor, beltColor, legColor, footColor, armColor, handColor, handHoleColor, outlineColor;
 
 	/* Attributes for MiniFig Head */
 	private int knobWidth, knobHeight, knobCurve;
@@ -97,6 +97,8 @@ public class MiniFig
 		armColor = new Color (14, 250, 20);
 		handColor = new Color(255,227,48);
 		handHoleColor = new Color(255,255,255,200);
+		outlineColor = Color.BLACK;
+		
 	}
 	
 	private void initializeHead() {
@@ -309,7 +311,7 @@ public class MiniFig
 		int knobHeightPadded = knobHeight + 2; // extend knob below head to hide curved border
 		canvas.setColor(headColor);
 		canvas.fillRoundRect(knobAnchor.x,knobAnchor.y,knobWidth,knobHeightPadded,knobCurve,knobCurve); //head knob
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawRoundRect(knobAnchor.x,knobAnchor.y,knobWidth,knobHeightPadded,knobCurve,knobCurve); //head knob
 
 		// Calculate eye positions based upon scaled dimensions and anchor point
@@ -322,18 +324,18 @@ public class MiniFig
 		// Draw the face components on the canvas
 		canvas.setColor(headColor);
 		canvas.fillRoundRect(faceAnchor.x,faceAnchor.y,faceWidth,faceHeight,faceCurve,faceCurve); //head
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawRoundRect(faceAnchor.x,faceAnchor.y,faceWidth,faceHeight,faceCurve,faceCurve); //head
 		canvas.setColor(eyeColor);
 		canvas.fillOval(leftEyeXOffset, EyeYOffset, eyeDiameter, eyeDiameter); // right eye
 		canvas.fillOval(rightEyeXOffset, EyeYOffset, eyeDiameter, eyeDiameter); // left eye
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawArc(mouthXOffset,mouthYOffset,mouthOvalDiameter,mouthOvalDiameter,225,90); // mouth
 		
 		// Draw the neck component on the canvas
 		canvas.setColor(headColor);
 		canvas.fillRect(neckAnchor.x,neckAnchor.y,neckWidth,neckHeight);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawRect(neckAnchor.x,neckAnchor.y,neckWidth,neckHeight);
 		
 		/*
@@ -342,6 +344,8 @@ public class MiniFig
 		// Draw the belt component on the canvas
 		canvas.setColor(beltColor);
 		canvas.fillRect(beltAnchor.x,beltAnchor.y, beltWidth, beltHeight); // belt
+		canvas.setColor(outlineColor);
+		canvas.drawRect(beltAnchor.x,beltAnchor.y, beltWidth, beltHeight); // belt
 
 		/* 
 		 * Component: Legs
@@ -356,11 +360,11 @@ public class MiniFig
 		// Draw the right leg components on the canvas
 		canvas.setColor(legColor);	
 		canvas.fillPolygon(rightLeg);  //right leg
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawPolygon(rightLeg);  //right leg
 		canvas.setColor(footColor);
 		canvas.fillRect(rightOuterAnkle.x, rightOuterAnkle.y, footWidth, footHeight); // right foot
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawRect(rightOuterAnkle.x, rightOuterAnkle.y, footWidth, footHeight); // right foot
 
 		// Create a new Polygon object for the left leg using the above Points
@@ -373,17 +377,17 @@ public class MiniFig
 		// Draw the left leg components on the canvas
 		canvas.setColor(legColor);	
 		canvas.fillPolygon(leftLeg);  //left leg
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawPolygon(leftLeg);  //left leg
 		canvas.setColor(footColor);
 		canvas.fillRect(leftInnerAnkle.x, leftInnerAnkle.y, footWidth, footHeight); // left foot
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawRect(leftInnerAnkle.x, leftInnerAnkle.y, footWidth, footHeight); // left foot
 
 		// Draw the leg divider components on the canvas
 		canvas.setColor(footColor);
 		canvas.fillRect(legDividerAnchor.x, legDividerAnchor.y, legDividerWidth, legDividerHeight);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawRect(legDividerAnchor.x, legDividerAnchor.y, legDividerWidth, legDividerHeight);
 		
 		/* 
@@ -400,11 +404,11 @@ public class MiniFig
 		// Draw the right arm components on the canvas
 		canvas.setColor(armColor);
 		canvas.fillPolygon(rightArm);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawPolygon(rightArm);
 		canvas.setColor(armColor);
 		canvas.fillArc(rightArmAnchor.x, rightArmAnchor.y, armUpperWidth * 2, armUpperHeight * 2,90,90);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawArc(rightArmAnchor.x, rightArmAnchor.y, armUpperWidth * 2, armUpperHeight * 2,90,80);
 		
 		// Create a new Polygon object for the left arm using the above Points
@@ -418,11 +422,11 @@ public class MiniFig
 		// Draw the right arm components on the canvas
 		canvas.setColor(armColor);
 		canvas.fillPolygon(leftArm);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawPolygon(leftArm);
 		canvas.setColor(armColor);
 		canvas.fillArc(leftArmAnchor.x, leftArmAnchor.y, armUpperWidth * 2, armUpperHeight * 2,90,-90);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawArc(leftArmAnchor.x, leftArmAnchor.y, armUpperWidth * 2, armUpperHeight * 2,90,-80);
 
 		/* 
@@ -438,7 +442,7 @@ public class MiniFig
 		// Draw the torso polygon over the top of the arms to make sure the shoulders look correct
 		canvas.setColor(torsoColor);
 		canvas.fillPolygon(torso);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawPolygon(torso);
 			
 		/* 
@@ -456,7 +460,7 @@ public class MiniFig
 		// Draw the right wrist components on the canvas
 		canvas.setColor(handColor);
 		canvas.fillPolygon(rightWrist);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawPolygon(rightWrist);
 
 		// Create a new Polygon object for the left wrist using the above Points
@@ -469,7 +473,7 @@ public class MiniFig
 		// Draw the left wrist components on the canvas
 		canvas.setColor(handColor);
 		canvas.fillPolygon(leftWrist);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawPolygon(leftWrist);
 		
 		/* 
@@ -480,23 +484,23 @@ public class MiniFig
 		canvas.setColor(handColor);
 		canvas.fillArc(leftHandAnchor.x, leftHandAnchor.y , handDiameter, handDiameter,-45,290);
 		canvas.fillOval(leftHandAnchor.x + ((handDiameter - handHoleDiameter) / 2), leftHandAnchor.y + ((handDiameter - handHoleDiameter) / 2), handHoleDiameter, handHoleDiameter);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawArc(leftHandAnchor.x, leftHandAnchor.y, handDiameter, handDiameter,-45,290);
 		canvas.setColor(handHoleColor);
 		canvas.fillOval(leftHandAnchor.x + ((handDiameter - handHoleDiameter) / 2), leftHandAnchor.y + ((handDiameter - handHoleDiameter) / 2), handHoleDiameter, handHoleDiameter);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawArc(leftHandAnchor.x + ((handDiameter - handHoleDiameter) / 2), leftHandAnchor.y + ((handDiameter - handHoleDiameter) / 2), handHoleDiameter, handHoleDiameter,-45,290);
 		
 		// Draw the right hand components on the canvas
 		canvas.setColor(handColor);
 		canvas.fillArc(rightHandAnchor.x, rightHandAnchor.y, handDiameter, handDiameter,-60,290);
 		canvas.fillOval(rightHandAnchor.x  + ((handDiameter - handHoleDiameter) / 2), rightHandAnchor.y + ((handDiameter - handHoleDiameter) / 2), handHoleDiameter, handHoleDiameter);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawArc(rightHandAnchor.x, rightHandAnchor.y, handDiameter, handDiameter,-60,290);
 		
 		canvas.setColor(handHoleColor);
 		canvas.fillOval(rightHandAnchor.x  + ((handDiameter - handHoleDiameter) / 2), rightHandAnchor.y + ((handDiameter - handHoleDiameter) / 2), handHoleDiameter, handHoleDiameter);
-		canvas.setColor(Color.BLACK);
+		canvas.setColor(outlineColor);
 		canvas.drawArc(rightHandAnchor.x + ((handDiameter - handHoleDiameter) / 2), rightHandAnchor.y + ((handDiameter - handHoleDiameter) / 2), handHoleDiameter, handHoleDiameter,-60,290);
 
 	}
@@ -563,6 +567,13 @@ public class MiniFig
 	 */
 	public void setEyeColor(Color eyeColor) {
 		this.eyeColor = eyeColor;
+	}
+	
+	/**
+	 * @param outlineColor the color for drawing the MiniFig outline
+	 */
+	public void setOutlineColor(Color outlineColor) {
+		this.outlineColor = outlineColor;
 	}
 
 	/**
