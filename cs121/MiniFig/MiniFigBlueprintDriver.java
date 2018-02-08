@@ -2,6 +2,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Color;
@@ -13,8 +15,10 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class MiniFigBlueprintDriver extends JPanel
 {
-	public final int INITIAL_WIDTH = 800;
-	public final int INITIAL_HEIGHT = 600;
+	public final int INITIAL_WIDTH = 600;
+	public final int INITIAL_HEIGHT = 450;
+	public enum Position {UpperLeft, LowerLeft, UpperRight, LowerRight};
+	
 	/**
 	 * Draws the picture in the panel. This is where all of your
 	 * code will go.
@@ -58,31 +62,90 @@ public class MiniFigBlueprintDriver extends JPanel
 		
 		Point topMidPoint = bob.getTopMidPoint();
 		page.fillOval(topMidPoint.x - pointDiameter / 2, topMidPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		placeText(page,topMidPoint.x,topMidPoint.y,"getTopMidPoint()",Position.UpperRight);
 		
 		Point capPoint = bob.getCapPoint();
 		page.fillOval(capPoint.x - pointDiameter / 2, capPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		placeText(page,capPoint.x,capPoint.y,"getCapPoint()",Position.UpperRight);
 		
 		Point rightShoulderPoint = bob.getRightShoulderPoint();
 		page.fillOval(rightShoulderPoint.x - pointDiameter / 2, rightShoulderPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		placeText(page,rightShoulderPoint.x,rightShoulderPoint.y,"getRightShoulderPoint()",Position.UpperLeft);
 		
 		Point leftShoulderPoint = bob.getLeftShoulderPoint();
 		page.fillOval(leftShoulderPoint.x - pointDiameter / 2, leftShoulderPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		placeText(page,leftShoulderPoint.x,leftShoulderPoint.y,"getLeftShoulderPoint()",Position.UpperRight);
 		
 		Point rightHandCenterPoint = bob.getRightHandCenterPoint();
 		page.fillOval(rightHandCenterPoint.x - pointDiameter / 2, rightHandCenterPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		placeText(page,rightHandCenterPoint.x,rightHandCenterPoint.y,"getRightHandCenterPoint()",Position.UpperLeft);
 		
 		Point leftHandCenterPoint = bob.getLeftHandCenterPoint();
 		page.fillOval(leftHandCenterPoint.x - pointDiameter / 2, leftHandCenterPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		placeText(page,leftHandCenterPoint.x,leftHandCenterPoint.y,"getLeftHandCenterPoint()",Position.LowerRight);
 		
 		Point baseMidPoint = bob.getBaseMidPoint();
 		page.fillOval(baseMidPoint.x - pointDiameter / 2, baseMidPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
-		
+		placeText(page,baseMidPoint.x,baseMidPoint.y,"getBaseMidPoint()",Position.LowerRight);
 		
 		/* Draw a box around MiniFig to test height and width */
 		//page.drawRect(mid - bob.getWidth()/2, top, bob.getWidth(), bob.getHeight());
 
 
 		
+	}
+	
+	private void placeText(Graphics g, int x, int y, String msg, Position p) {
+		g.setFont(new Font("Monospaced", Font.BOLD, 12));
+		
+		
+		FontMetrics metrics = g.getFontMetrics();
+		int msgWidth = metrics.stringWidth(msg);
+		int msgHeight = metrics.getHeight();
+		
+		Point p1 = new Point(x,y);
+		Point p2 = new Point();
+		Point p3 = new Point();
+		Point p4 = new Point();
+		
+		if (p == Position.UpperRight) {
+			p2.x = p1.x+15;
+			p2.y = p1.y-msgHeight;
+			p3.x = p2.x+15;
+			p3.y = p2.y;
+			p4.x = p3.x;
+			p4.y = p3.y;
+		} else if (p == Position.LowerRight) {
+			p2.x = p1.x+15;
+			p2.y = p1.y+msgHeight;
+			p3.x = p2.x+15;
+			p3.y = p2.y;
+			p4.x = p3.x;
+			p4.y = p3.y;
+		} else if (p == Position.UpperLeft) {
+			p2.x = p1.x-15;
+			p2.y = p1.y-msgHeight;
+			p3.x = p2.x-15;
+			p3.y = p2.y;
+			p4.x = p3.x - msgWidth ;
+			p4.y = p3.y;
+		} else if (p == Position.LowerLeft) {
+			p2.x = p1.x-15;
+			p2.y = p1.y+msgHeight;
+			p3.x = p2.x-15;
+			p3.y = p2.y;
+			p4.x = p3.x - msgWidth ;
+			p4.y = p3.y;
+		} 
+
+		
+		Color savedColor = g.getColor();
+		g.setColor(Color.black);
+		g.drawLine(p1.x,p1.y, p2.x, p2.y);
+		g.drawLine(p2.x,p2.y, p3.x, p3.y);
+		g.drawString(msg, p4.x, p4.y);
+		
+		g.setColor(savedColor);
 	}
 
 
