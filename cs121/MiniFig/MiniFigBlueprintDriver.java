@@ -15,8 +15,8 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class MiniFigBlueprintDriver extends JPanel
 {
-	public final int INITIAL_WIDTH = 600;
-	public final int INITIAL_HEIGHT = 450;
+	public final int INITIAL_WIDTH = 850;
+	public final int INITIAL_HEIGHT = 600;
 	public enum Position {UpperLeft, LowerLeft, UpperRight, LowerRight};
 	
 	/**
@@ -29,7 +29,7 @@ public class MiniFigBlueprintDriver extends JPanel
 		
 		/* This is the anchor point for the MiniFig (x,y) -> (mid,top) */
 		int mid = getWidth() / 2;
-		int top = 50;
+		int top = 100;
 		
 		/* Create a new MiniFig object */
 		MiniFig bob = new MiniFig(page,mid,top);
@@ -74,7 +74,7 @@ public class MiniFigBlueprintDriver extends JPanel
 		
 		Point leftShoulderPoint = bob.getLeftShoulderPoint();
 		page.fillOval(leftShoulderPoint.x - pointDiameter / 2, leftShoulderPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
-		placeText(page,leftShoulderPoint.x,leftShoulderPoint.y,"getLeftShoulderPoint()",Position.UpperRight);
+		placeText(page,leftShoulderPoint.x,leftShoulderPoint.y,"getLeftShoulderPoint()",Position.LowerRight);
 		
 		Point rightHandCenterPoint = bob.getRightHandCenterPoint();
 		page.fillOval(rightHandCenterPoint.x - pointDiameter / 2, rightHandCenterPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
@@ -90,15 +90,50 @@ public class MiniFigBlueprintDriver extends JPanel
 		
 		/* Draw a box around MiniFig to test height and width */
 		//page.drawRect(mid - bob.getWidth()/2, top, bob.getWidth(), bob.getHeight());
+		
+		placeVerticalRuler(page,topMidPoint.x + 300, topMidPoint.y + bob.getHeight()/2, bob.getHeight(),"getHeight()", Position.UpperRight);
+		
+		placeVerticalRuler(page,capPoint.x + bob.getFaceWidth()/2 +50, capPoint.y + bob.getFaceHeight()/2, bob.getFaceHeight(),"getFaceHeight()",Position.UpperRight);
 
-
+		placeHorizontalRuler(page,baseMidPoint.x, baseMidPoint.y + 50, bob.getWidth(),"getWidth()", Position.LowerRight);
+		
+		placeHorizontalRuler(page,topMidPoint.x, topMidPoint.y - 50, bob.getFaceWidth(),"getFaceWidth()", Position.UpperRight);
 		
 	}
 	
-	private void placeText(Graphics g, int x, int y, String msg, Position p) {
+	private void placeVerticalRuler(Graphics g, int midx, int midy, int length, String msg, Position textPosition ) {
+		
+		Point p1 = new Point(midx,midy);
+		Point p2 = new Point(midx,midy - length / 2);
+		Point p3 = new Point(midx,midy + length / 2);
+		
+		Color savedColor = g.getColor();
+		g.setColor(Color.black);
+		g.drawLine(p2.x,p2.y, p3.x, p3.y);
+		g.drawLine(p2.x-4,p2.y, p2.x+4, p2.y);
+		g.drawLine(p3.x-4,p3.y, p3.x+4, p3.y);
+		g.setColor(savedColor);
+		placeText(g,p1.x,p1.y,msg,textPosition);	
+	}
+	
+	private void placeHorizontalRuler(Graphics g, int midx, int midy, int length, String msg, Position textPosition ) {
+		
+		Point p1 = new Point(midx,midy);
+		Point p2 = new Point(midx - length / 2, midy);
+		Point p3 = new Point(midx + length / 2, midy);
+		
+		Color savedColor = g.getColor();
+		g.setColor(Color.black);
+		g.drawLine(p2.x,p2.y, p3.x, p3.y);
+		g.drawLine(p2.x,p2.y-4, p2.x, p2.y+4);
+		g.drawLine(p3.x,p3.y-4, p3.x, p3.y+4);
+		g.setColor(savedColor);
+		placeText(g,p1.x,p1.y,msg,textPosition);	
+	}
+	
+	private void placeText(Graphics g, int x, int y, String msg, Position textPosition) {
 		g.setFont(new Font("Monospaced", Font.BOLD, 12));
-		
-		
+
 		FontMetrics metrics = g.getFontMetrics();
 		int msgWidth = metrics.stringWidth(msg);
 		int msgHeight = metrics.getHeight();
@@ -108,28 +143,28 @@ public class MiniFigBlueprintDriver extends JPanel
 		Point p3 = new Point();
 		Point p4 = new Point();
 		
-		if (p == Position.UpperRight) {
+		if (textPosition == Position.UpperRight) {
 			p2.x = p1.x+15;
 			p2.y = p1.y-msgHeight;
 			p3.x = p2.x+15;
 			p3.y = p2.y;
 			p4.x = p3.x;
 			p4.y = p3.y;
-		} else if (p == Position.LowerRight) {
+		} else if (textPosition == Position.LowerRight) {
 			p2.x = p1.x+15;
 			p2.y = p1.y+msgHeight;
 			p3.x = p2.x+15;
 			p3.y = p2.y;
 			p4.x = p3.x;
 			p4.y = p3.y;
-		} else if (p == Position.UpperLeft) {
+		} else if (textPosition == Position.UpperLeft) {
 			p2.x = p1.x-15;
 			p2.y = p1.y-msgHeight;
 			p3.x = p2.x-15;
 			p3.y = p2.y;
 			p4.x = p3.x - msgWidth ;
 			p4.y = p3.y;
-		} else if (p == Position.LowerLeft) {
+		} else if (textPosition == Position.LowerLeft) {
 			p2.x = p1.x-15;
 			p2.y = p1.y+msgHeight;
 			p3.x = p2.x-15;
