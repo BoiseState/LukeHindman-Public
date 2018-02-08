@@ -628,6 +628,13 @@ public class MiniFig
 	}
 	
 	/**
+	 * @return a point along the middle axis of the MiniFig at the top
+	 */
+	public Point getTopMidPoint() {
+		return new Point(this.mid,this.top);
+	}
+	
+	/**
 	 * @return a point along the middle axis of the MiniFig at the base
 	 */
 	public Point getBaseMidPoint() {

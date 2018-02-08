@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Color;
 
 /**
@@ -49,6 +50,33 @@ public class MiniFigBlueprintDriver extends JPanel
 
 		/* Draw the MiniFig */
 		bob.draw();
+		
+		
+		/* Mark the points on MiniFig that are available via accessor methods */
+		int pointDiameter = 8;
+		page.setColor(Color.WHITE);
+		
+		Point topMidPoint = bob.getTopMidPoint();
+		page.fillOval(topMidPoint.x - pointDiameter / 2, topMidPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		
+		Point capPoint = bob.getCapPoint();
+		page.fillOval(capPoint.x - pointDiameter / 2, capPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		
+		Point rightShoulderPoint = bob.getRightShoulderPoint();
+		page.fillOval(rightShoulderPoint.x - pointDiameter / 2, rightShoulderPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		
+		Point leftShoulderPoint = bob.getLeftShoulderPoint();
+		page.fillOval(leftShoulderPoint.x - pointDiameter / 2, leftShoulderPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		
+		Point rightHandCenterPoint = bob.getRightHandCenterPoint();
+		page.fillOval(rightHandCenterPoint.x - pointDiameter / 2, rightHandCenterPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		
+		Point leftHandCenterPoint = bob.getLeftHandCenterPoint();
+		page.fillOval(leftHandCenterPoint.x - pointDiameter / 2, leftHandCenterPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		
+		Point baseMidPoint = bob.getBaseMidPoint();
+		page.fillOval(baseMidPoint.x - pointDiameter / 2, baseMidPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
+		
 		
 		/* Draw a box around MiniFig to test height and width */
 		//page.drawRect(mid - bob.getWidth()/2, top, bob.getWidth(), bob.getHeight());
