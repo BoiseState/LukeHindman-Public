@@ -9,7 +9,8 @@ import java.awt.Point;
 import java.awt.Color;
 
 /**
- * A starting point for creating a new graphical program
+ * Draw a blueprint for a MiniFig, showing the points that 
+ *  are accessible via public MiniFig methods.
  * @author CS121 instructors
  */
 @SuppressWarnings("serial")
@@ -66,7 +67,7 @@ public class MiniFigBlueprintDriver extends JPanel
 		
 		Point capPoint = bob.getCapPoint();
 		page.fillOval(capPoint.x - pointDiameter / 2, capPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
-		placeText(page,capPoint.x,capPoint.y,"getCapPoint()",Position.UpperRight);
+		placeText(page,capPoint.x,capPoint.y,"getCapPoint()",Position.UpperLeft);
 		
 		Point rightShoulderPoint = bob.getRightShoulderPoint();
 		page.fillOval(rightShoulderPoint.x - pointDiameter / 2, rightShoulderPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
@@ -88,19 +89,23 @@ public class MiniFigBlueprintDriver extends JPanel
 		page.fillOval(baseMidPoint.x - pointDiameter / 2, baseMidPoint.y - pointDiameter / 2, pointDiameter, pointDiameter);
 		placeText(page,baseMidPoint.x,baseMidPoint.y,"getBaseMidPoint()",Position.LowerRight);
 		
-		/* Draw a box around MiniFig to test height and width */
-		//page.drawRect(mid - bob.getWidth()/2, top, bob.getWidth(), bob.getHeight());
-		
+		/* Draw a the vertical and horizontal rulers for MiniFig height and width */
 		placeVerticalRuler(page,topMidPoint.x + 300, topMidPoint.y + bob.getHeight()/2, bob.getHeight(),"getHeight()", Position.UpperRight);
-		
 		placeVerticalRuler(page,capPoint.x + bob.getFaceWidth()/2 +50, capPoint.y + bob.getFaceHeight()/2, bob.getFaceHeight(),"getFaceHeight()",Position.UpperRight);
-
 		placeHorizontalRuler(page,baseMidPoint.x, baseMidPoint.y + 50, bob.getWidth(),"getWidth()", Position.LowerRight);
-		
 		placeHorizontalRuler(page,topMidPoint.x, topMidPoint.y - 50, bob.getFaceWidth(),"getFaceWidth()", Position.UpperRight);
-		
-	}
 	
+	}
+
+	/**
+	 * Draw a vertical ruler on the blueprint
+	 * @param g Graphics canvas to draw on
+	 * @param midx X component of midpoint of ruler
+	 * @param midy Y component of midpoint of the ruler
+	 * @param length length of the ruler 
+	 * @param msg Text label for the ruler
+	 * @param textPosition Orientation of the text label
+	 */
 	private void placeVerticalRuler(Graphics g, int midx, int midy, int length, String msg, Position textPosition ) {
 		
 		Point p1 = new Point(midx,midy);
@@ -115,7 +120,15 @@ public class MiniFigBlueprintDriver extends JPanel
 		g.setColor(savedColor);
 		placeText(g,p1.x,p1.y,msg,textPosition);	
 	}
-	
+	/**
+	 * Draw a horizontal ruler on the blueprint
+	 * @param g Graphics canvas to draw on
+	 * @param midx X component of midpoint of ruler
+	 * @param midy Y component of midpoint of the ruler
+	 * @param length length of the ruler 
+	 * @param msg Text label for the ruler
+	 * @param textPosition Orientation of the text label
+	 */
 	private void placeHorizontalRuler(Graphics g, int midx, int midy, int length, String msg, Position textPosition ) {
 		
 		Point p1 = new Point(midx,midy);
@@ -131,6 +144,14 @@ public class MiniFigBlueprintDriver extends JPanel
 		placeText(g,p1.x,p1.y,msg,textPosition);	
 	}
 	
+	/**
+	 * Draw a text table on the canvas
+	 * @param g Graphics canvas
+	 * @param x X component of the point to anchor the label to
+	 * @param y Y component of the point to anchor the label to
+	 * @param msg Contents of label
+	 * @param textPosition Orientation of the label
+	 */
 	private void placeText(Graphics g, int x, int y, String msg, Position textPosition) {
 		g.setFont(new Font("Monospaced", Font.BOLD, 12));
 
