@@ -62,14 +62,22 @@ public class MiniFig
 	
 	
 	/**
-	 * Constructor (panel initialization)
+	 * Constructor for a new MiniFig with a fixed size
+	 * @param canvas Graphics canvas on which to draw the MiniFig
+	 * @param midX X component of the MiniFig anchor point, located at the top, center of the MiniFig
+	 * @param topY Y component of the MiniFig anchor point, located at the top, center of the MiniFig
 	 */
-
 	public MiniFig(Graphics canvas, int midX, int topY)
 	{
 		this(canvas,1.0,midX,topY);
 	}
 	
+	/**
+	 * @param canvas Graphics canvas on which to draw the MiniFig
+	 * @param scaleFactor Decimal scaler to resize MiniFig
+	 * @param midX X component of the MiniFig anchor point, located at the top, center of the MiniFig
+	 * @param topY Y component of the MiniFig anchor point, located at the top, center of the MiniFig
+	 */
 	public MiniFig(Graphics canvas, double scaleFactor, int midX, int topY)
 	{
 		this.canvas = canvas;
@@ -86,6 +94,9 @@ public class MiniFig
 		initializeHands();
 	}
 	
+	/**
+	 * Helper method to set initial component colors
+	 */
 	private void initializeColors() {
 		/* Define colors for each of the MiniFig components */
 		headColor = new Color(255,227,48);
@@ -101,6 +112,9 @@ public class MiniFig
 		
 	}
 	
+	/**
+	 * Helper method to initialize anchor points and dimensions for head
+	 */
 	private void initializeHead() {
 		
 		// Calculate scaled knob dimensions
@@ -135,6 +149,9 @@ public class MiniFig
 		
 	}
 	
+	/**
+	 * Helper method to initialize anchor points and dimensions for torso
+	 */
 	private void initializeTorso() {
 		// Calculate scaled torso dimensions
 		torsoShoulderWidth = (int) (90 * scaleFactor);
@@ -152,6 +169,9 @@ public class MiniFig
 		rightWaist = new Point(mid - torsoWaistWidth / 2, torsoWaistYOffset);
 	}
 	
+	/**
+	 * Helper method to initialize anchor points and dimensions for belt
+	 */
 	private void initializeBelt() {
 		// Calculate scaled belt dimensions
 		beltWidth = (int) (120 * scaleFactor);
@@ -161,6 +181,9 @@ public class MiniFig
 		beltAnchor = new Point(mid - beltWidth/2, leftWaist.y);
 	}
 	
+	/**
+	 * Helper method to initialize anchor points and dimensions for legs
+	 */
 	private void initializeLegs() {
 
 		// Calculate scaled leg dimensions
@@ -192,6 +215,9 @@ public class MiniFig
 		legDividerAnchor = new Point(mid - legDividerWidth / 2, beltAnchor.y + beltHeight);
 	}
 	
+	/**
+	 * Helper method to initialize anchor points and dimensions for arms
+	 */
 	private void initializeArms() {
 
 		// Calculate scaled arm dimensions
@@ -222,10 +248,10 @@ public class MiniFig
 		leftArmPit = new Point(leftArmAnchor.x + armUpperWidth, leftArmAnchor.y);
 	}
 	
+	/**
+	 * Helper method to initialize anchor points and dimensions for hands
+	 */
 	private void initializeHands() {
-		
-		
-		
 		int wristLength = (int) (15 * scaleFactor);
 		// Calculate width of cuff using Pythagorean Theorem */
 		double cuffWidth = Math.sqrt( Math.pow(Math.abs(rightArmCuffOuter.x - rightArmCuffInner.x),2) +
@@ -297,12 +323,9 @@ public class MiniFig
 	}
 
 	/**
-	 * Draws the picture in the panel. This is where all of your
-	 * code will go.
-	 * @param canvas Our graphics canvas.
+	 * Draws the MiniFig on the canvas
 	 */
-	public void draw ()
-
+	public void draw()
 	{	
 		/* 
 		 * Component: Head
@@ -479,7 +502,6 @@ public class MiniFig
 		/* 
 		 * Component:  Hands
 		 */
-		
 		// Draw the left hand components on the canvas
 		canvas.setColor(handColor);
 		canvas.fillArc(leftHandAnchor.x, leftHandAnchor.y , handDiameter, handDiameter,-45,290);
@@ -506,6 +528,9 @@ public class MiniFig
 	}
 	
 	/**
+	 * Change the color of the MiniFig head to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param headColor the headColor to set
 	 */
 	public void setHeadColor(Color headColor) {
@@ -514,6 +539,9 @@ public class MiniFig
 
 
 	/**
+	 * Change the color of the MiniFig torso to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param torsoColor the torsoColor to set
 	 */
 	public void setTorsoColor(Color torsoColor) {
@@ -521,6 +549,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Change the color of the MiniFig belt to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param beltColor the beltColor to set
 	 */
 	public void setBeltColor(Color beltColor) {
@@ -528,6 +559,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Change the color of the MiniFig legs to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param legColor the legColor to set
 	 */
 	public void setLegColor(Color legColor) {
@@ -535,6 +569,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Change the color of the MiniFig feet to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param footColor the footColor to set
 	 */
 	public void setFootColor(Color footColor) {
@@ -542,6 +579,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Change the color of the MiniFig arms to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param armColor the armColor to set
 	 */
 	public void setArmColor(Color armColor) {
@@ -549,6 +589,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Change the color of the MiniFig hands to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param handColor the handColor to set
 	 */
 	public void setHandColor(Color handColor) {
@@ -556,6 +599,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Change the color of the center of the hands to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param handHoleColor the handHoleColor to set
 	 */
 	public void setHandHoleColor(Color handHoleColor) {
@@ -563,6 +609,9 @@ public class MiniFig
 	}
 	
 	/**
+	 * Change the color of the MiniFig eyes to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param eyeColor the eyeColor to set
 	 */
 	public void setEyeColor(Color eyeColor) {
@@ -570,6 +619,9 @@ public class MiniFig
 	}
 	
 	/**
+	 * Change the color of the MiniFig outline to the specified value. MiniFig
+	 *   must be redrawn for the color change to take affect.
+	 *   
 	 * @param outlineColor the color for drawing the MiniFig outline
 	 */
 	public void setOutlineColor(Color outlineColor) {
@@ -577,6 +629,8 @@ public class MiniFig
 	}
 
 	/**
+	 * Get the Point (x,y) representing the top of the face.
+	 * 
 	 * @return the capPoint
 	 */
 	public Point getCapPoint() {
@@ -584,6 +638,9 @@ public class MiniFig
 	}
 	
 	/**
+	 * Get the Point (x,y) representing the center of the left hand from the
+	 *   MiniFig's perspective.
+	 * 
 	 * @return the center Point of left hand
 	 */
 	public Point getLeftHandCenterPoint() {
@@ -591,6 +648,9 @@ public class MiniFig
 	}
 	
 	/**
+	 * Get the Point (x,y) representing the center of the right hand from the
+	 *   MiniFig's perspective.
+	 * 
 	 * @return the center Point of right hand
 	 */
 	public Point getRightHandCenterPoint() {
@@ -598,6 +658,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Get the Point (x,y) representing the right shoulder from the 
+	 *    MiniFig's perspective.
+	 *    
 	 * @return the rightShoulder
 	 */
 	public Point getRightShoulderPoint() {
@@ -605,6 +668,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Get the Point (x,y) representing the left shoulder from the 
+	 *    MiniFig's perspective.
+	 *    
 	 * @return the leftShoulder
 	 */
 	public Point getLeftShoulderPoint() {
@@ -612,6 +678,9 @@ public class MiniFig
 	}
 	
 	/**
+	 * Get the total height of the MiniFig, measured from the top of 
+	 *    of the knob to the bottom of the feet.
+	 *    
 	 * @return the total height of MiniFig
 	 */
 	public int getHeight() {
@@ -620,6 +689,9 @@ public class MiniFig
 	}
 
 	/**
+	 * Get the total width of the MiniFig, measured from the outside 
+	 *    edge of the right hand to the outside edge of the left hand.
+	 * 
 	 * @return the total width of MiniFig
 	 */
 	public int getWidth() {
@@ -628,6 +700,10 @@ public class MiniFig
 	}
 	
 	/**
+	 * Get the Point (x,y) representing the top middle of the MiniFig. This
+	 *   Point is actually the same as the anchor point that is specified
+	 *   when the MiniFig is created.
+	 * 
 	 * @return a point along the middle axis of the MiniFig at the top
 	 */
 	public Point getTopMidPoint() {
@@ -635,6 +711,8 @@ public class MiniFig
 	}
 	
 	/**
+	 * Get the Point (x,y) representing the bottom middle of the MiniFig.
+	 * 
 	 * @return a point along the middle axis of the MiniFig at the base
 	 */
 	public Point getBaseMidPoint() {
@@ -642,6 +720,8 @@ public class MiniFig
 	}
 	
 	/**
+	 * Get the height of the MiniFig's face.
+	 * 
 	 * @return the height of the MiniFig face
 	 */
 	public int getFaceHeight() {
@@ -649,6 +729,8 @@ public class MiniFig
 	}
 	
 	/**
+	 * Get the width of the MiniFig's face.
+	 * 
 	 * @return the width of the MiniFig face
 	 */
 	public int getFaceWidth() {
