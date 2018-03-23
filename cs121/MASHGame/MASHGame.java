@@ -13,6 +13,18 @@ public class MASHGame {
 		ArrayList<String> occupationList = new ArrayList<String>();
 		ArrayList<String> transportationList = new ArrayList<String>();
 		ArrayList<String> hometownList = new ArrayList<String>();
+		
+		
+		ArrayList<ArrayList<String>> database = new ArrayList<ArrayList<String>>();
+		database.add(homeList);
+		database.add(femaleSpouseList);
+		database.add(maleSpouseList);
+		database.add(occupationList);
+		database.add(transportationList);
+		database.add(hometownList);
+		
+
+		
 
 		/* Add items to home list */
 		homeList.add("mansion");
@@ -57,16 +69,25 @@ public class MASHGame {
 		hometownList.add("Brooklyn");
 		hometownList.add("Manhattan");
 		hometownList.add("Staten Island");
+		
+		
+		/* Print the database */
+		System.out.println("--------------------------Future Database---------------------------");
+		for (ArrayList<String> item: database) {
+			System.out.println(item);
+		}
+		System.out.println("--------------------------------------------------------------------");
+		System.out.println("\n\n");
 
 		/* Ask the player for their name */
 		Scanner kbd = new Scanner(System.in);
 		System.out.println("Please enter your name:");
 		String name = kbd.nextLine();
 		kbd.close();
-
+		System.out.println("\n\n");
 		/* Randomly choose items from each List */
 		Random rand = new Random();
-		String firstHome = homeList.get(rand.nextInt(homeList.size()));
+		String firstHome = homeList.get(rand.nextInt(homeList.size()));	
 		String secondHome = homeList.get(rand.nextInt(homeList.size()));
 		String occupation = occupationList.get(rand.nextInt(occupationList.size()));
 		String transportation = transportationList.get(rand.nextInt(transportationList.size()));
