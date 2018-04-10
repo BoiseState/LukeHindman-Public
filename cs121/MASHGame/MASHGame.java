@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,18 +14,6 @@ public class MASHGame {
 		ArrayList<String> occupationList = new ArrayList<String>();
 		ArrayList<String> transportationList = new ArrayList<String>();
 		ArrayList<String> hometownList = new ArrayList<String>();
-		
-		
-		ArrayList<ArrayList<String>> database = new ArrayList<ArrayList<String>>();
-		database.add(homeList);
-		database.add(femaleSpouseList);
-		database.add(maleSpouseList);
-		database.add(occupationList);
-		database.add(transportationList);
-		database.add(hometownList);
-		
-
-		
 
 		/* Add items to home list */
 		homeList.add("mansion");
@@ -72,16 +61,55 @@ public class MASHGame {
 		
 		
 		/* Print the database */
-		System.out.println("--------------------------Future Database---------------------------");
-		for (ArrayList<String> item: database) {
-			System.out.println(item);
+		System.out.println("--------------------- Future Possibilities Database ------------------------");
+		System.out.print("Home List: ");
+		for (String item: homeList) {
+			System.out.print(item + " ");
 		}
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("\n\n");
+		System.out.println();
+		
+		System.out.println("Female Spouse List: " + femaleSpouseList);
+		
+		System.out.print("Male Spouse List: ");
+		for (int i = 0; i < maleSpouseList.size(); i++) {
+			System.out.print(maleSpouseList.get(i));
+			if (i < maleSpouseList.size() -1 ) {
+				System.out.print(", ");
+			}
+		}
+		System.out.println();
+		
+		System.out.print("Occupation List: ");
+		Iterator<String> listIterator = occupationList.iterator();
+		while (listIterator.hasNext()) {
+			String item = listIterator.next();
+			System.out.print(item);
+			
+			if (listIterator.hasNext()) {
+				System.out.print(", ");
+			}
+		}
+		System.out.println();
+		
+		System.out.print("Transportation List: ");
+		for (String item: transportationList) {
+			System.out.print(item + ", ");
+		}
+		System.out.println();
+		
+		System.out.print("Hometown List: ");
+		for (String item: hometownList) {
+			System.out.print(item + ", ");
+		}
+		System.out.println();
+		
+		
+		System.out.println("----------------------------------------------------------------------------");
+		System.out.println("\n");
 
 		/* Ask the player for their name */
 		Scanner kbd = new Scanner(System.in);
-		System.out.println("Please enter your name:");
+		System.out.print("Please enter your name: ");
 		String name = kbd.nextLine();
 		kbd.close();
 		System.out.println("\n\n");
@@ -111,7 +139,7 @@ public class MASHGame {
 		
 		output += name + ", this is your future... \n";
 		output += "You will marry " + spouse + " and live in a " + firstHome + ". \n";
-		output += "After " + yearsOfMarriage + " years of marriage, you will finally get your dream job of being a " + occupation + ". \n";
+		output += "After " + yearsOfMarriage + (yearsOfMarriage == 1?" year":" years") +" of marriage, you will finally get your dream job of being a " + occupation + ". \n";
 		output += "Your family will move to a " + secondHome + " in " + hometown + " where you will " + transportation + " to work each day. \n";
 
 		System.out.println(output);
