@@ -1,5 +1,9 @@
 import javax.swing.JFrame;
-
+/**
+ * Driver for the FancyColorChooser example
+ * @author lhindman
+ *
+ */
 public class FancyColorChooser {
 
 	public static void main(String[] args) {

@@ -8,7 +8,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * Generic counter panel with up/down buttons and a label
+ *   to display the current value.  This version has an 
+ *   integrated listener and support setting the border
+ *   color.
+ * @author lhindman
+ *
+ */
 @SuppressWarnings("serial")
 public class CounterPanel extends JPanel{
 	
@@ -19,12 +26,15 @@ public class CounterPanel extends JPanel{
 	private JButton upButton;
 	private JButton downButton;
 	private JLabel displayLabel;
-	//private JTextField displayField;
+
 	
 	/* Constructor */
 	public CounterPanel(int maxValue) {
+		/* Setup the range for the valid values for the CounterPanel */
 		this.value = minValue;
 		this.maxValue = maxValue;
+		
+		/* Instantiate the JButtons and JLabel set proper alignment */
 		this.upButton = new JButton("Up");
 		this.upButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.downButton = new JButton("Down");
@@ -34,6 +44,8 @@ public class CounterPanel extends JPanel{
 		
 		/* Change the default layout from FlowLayout to BoxLayout */
 		this.setLayout( new BoxLayout(this,BoxLayout.Y_AXIS));
+		
+		/* Create a default black border around the panel, 4px wide */
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 		
 		/* Create a new CounterPanelListenerButton and add it to the buttons */
@@ -46,11 +58,10 @@ public class CounterPanel extends JPanel{
 		this.add(displayLabel);
 		this.add(downButton);
 		
+		/* Enable/Disable the up/down buttons based upon the current value */
 		updateButtonState();
 		
 	}
-	
-	/* Useful Methods */
 	
 	/**
 	 * Return the current value of the CounterPanel
@@ -70,10 +81,21 @@ public class CounterPanel extends JPanel{
 			this.displayLabel.setText(Integer.toString(value));
 		}
 		updateButtonState();
-		displayLabel.setText(Integer.toString(value));
-		
+		displayLabel.setText(Integer.toString(value));	
 	}
 	
+	/**
+	 * Set the border of the CounterPanel to the specified value
+	 * @param c Color of the CounterPanel border
+	 */
+	public void setBorderColor(Color c) {
+		this.setBorder(BorderFactory.createLineBorder(c, 4));
+	}
+	
+	/*
+	 * Helper method to enable/disable buttons to prevent
+	 *   exceeding the min/max values for the CounterPanel
+	 */
 	private void updateButtonState() {
 		if (value == maxValue) {
 			upButton.setEnabled(false);
@@ -88,12 +110,11 @@ public class CounterPanel extends JPanel{
 		}
 	}
 	
-	public void setBorderColor(Color c) {
-		this.setBorder(BorderFactory.createLineBorder(c, 4));
-	}
-	
-	/* Define the ActionListener for the counter panel buttons */
-	
+	/**
+	 * Internal listener to manage the behavior of CounterPanel buttons
+	 * @author lhindman
+	 *
+	 */
 	private class CounterPanelButtonListener implements ActionListener {
 
 		@Override
@@ -105,12 +126,6 @@ public class CounterPanel extends JPanel{
 			} else {
 				setValue(value - 1);
 			}
-
-			
-			
-		}
-		
+		}	
 	}
-	
-
 }

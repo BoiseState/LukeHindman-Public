@@ -5,46 +5,53 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+/**
+ * Top-level panel for the FancyColorChooser example
+ * @author lhindman
+ *
+ */
 @SuppressWarnings("serial")
 public class FancyColorChooserPanel extends JPanel {
 	
 	/* Instance variables */
-	private ControlPanel inputGrid;
+	private ControlPanel colorSelector;
 	private JPanel displayPanel;
 	private JButton updateDisplayButton;
 	
 	/* Constructor */
 	public FancyColorChooserPanel() {
-		
-		/* Change the default layout from FlowLayout to BorderLayout */
-		this.setLayout(new BorderLayout());
-		
+
 		/* Create the GUI components */
-		inputGrid = new ControlPanel();
+		colorSelector = new ControlPanel();
 		displayPanel = new JPanel();
 		displayPanel.setPreferredSize(new Dimension(300,300));
 		updateDisplayButton = new JButton("Update Color");
 		updateDisplayButton.addActionListener(new DisplayUpdateActionListener());
 		
-		/* Add components to panel */
+		/* Change the default layout from FlowLayout to BorderLayout */
+		this.setLayout(new BorderLayout());
 		
-		this.add(inputGrid,BorderLayout.SOUTH);
+		/* Add components to panel */
+		this.add(colorSelector,BorderLayout.SOUTH);
 		this.add(displayPanel,BorderLayout.CENTER);
 		this.add(updateDisplayButton, BorderLayout.EAST);
 		
 	}
 	
+	/**
+	 * Listener that updates the displayPanel to the custom color set
+	 *    in the ControlPanel.
+	 * @author lhindman
+	 *
+	 */
 	private class DisplayUpdateActionListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			displayPanel.setBackground(inputGrid.getColor());
+			displayPanel.setBackground(colorSelector.getColor());
 			
 		}
 		
 	}
-	
-	
 
 }
