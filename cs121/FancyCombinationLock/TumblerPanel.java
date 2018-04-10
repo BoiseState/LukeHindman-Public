@@ -1,13 +1,19 @@
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-
+/**
+ * Define a TumblerPanel to manage the creation and layout of multiple CounterPanels
+ * @author lhindman
+ *
+ */
 @SuppressWarnings("serial")
 public class TumblerPanel extends JPanel {
 	
 	/* Instance Variables */
 	private CounterPanel tumblerCounter0, tumblerCounter1, tumblerCounter2;
 	
+	/* Constructor */
 	public TumblerPanel(int maxValue) {
+		/* Create three tumblers */
 		tumblerCounter0 = new CounterPanel(maxValue);
 		tumblerCounter1 = new CounterPanel(maxValue);
 		tumblerCounter2 = new CounterPanel(maxValue);

@@ -1,5 +1,9 @@
 import javax.swing.JFrame;
-
+/**
+ * Driver class for FancyCombinationLock example
+ * @author lhindman
+ *
+ */
 public class FancyCombinationLock {
 
 	public static void main(String[] args) {
