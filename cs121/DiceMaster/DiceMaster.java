@@ -28,19 +28,4 @@ public class DiceMaster {
 		}
 
 	}
-	
-	public static Die max (Die d1, Die d2) {
-		Die result = null;
-		
-//		if (d1.getFaceValue() >= d2.getFaceValue()) {
-//			result = d1;
-//		} else {
-//			result = d2;
-//		}
-		
-		d1.roll();
-		
-		return result;
-	}
-
 }
