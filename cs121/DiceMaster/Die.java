@@ -5,9 +5,10 @@ import java.awt.Color;
   	where n is specified when the die is constructed.
 
   	@author amit
+  	@author Luke Hindman
 */
 
-public class Die
+public class Die implements Comparable<Die>
 {
 	private final int DEFAULT_FACES = 6;  // maximum face value
 	private int numberOfSides; //number of faces on the die
@@ -50,7 +51,7 @@ public class Die
 	/**
 	  Number of sides value accessor.
 	*/
-	public int getNumberOfFaces() 
+	public int getNumberOfSides() 
 	{ 
 		return numberOfSides; 
 	}
@@ -107,5 +108,22 @@ public class Die
 	   String result = "Die [numberOfSides = " + numberOfSides + ", faceValue = " + faceValue + "]";
 
 	   return result;
+	}
+	
+	public boolean equals(Die d) {
+		boolean result = false;
+		
+		if (this.numberOfSides == d.getNumberOfSides() && this.dieColor.equals(d.getDieColor())) {
+			result = true;
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int compareTo(Die o) {
+		// TODO Auto-generated method stub
+		System.out.println(o.getFaceValue());
+		return this.faceValue - o.getFaceValue();
 	}
 }
