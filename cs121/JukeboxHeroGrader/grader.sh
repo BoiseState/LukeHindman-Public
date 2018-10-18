@@ -12,11 +12,8 @@ grader_file_path="tmp.$$"
 echo "---------------------------------"
 echo "Download and Unpack Support Files"
 echo "---------------------------------"
-if [ -e Song.java -a ! -e Song.java.orig ];
-then
-	mv Song.java Song.java.orig
-fi
 
+mkdir ${grader_file_path}
 cd ${grader_file_path}
 wget https://github.com/BoiseState/CS121-Public/raw/master/projects/p2-jukeboxhero/p2-jukeboxhero-support.zip
 
@@ -46,7 +43,7 @@ then
         echo "Song.java matches original"
 else
         echo "Song.java has been modified by the student. Replacing with original version"
-	new_file="Song.java.${USER}
+	new_file="Song.java.${USER}"
 	mv Song.java ${new_file}
 	cp ${grader_file_path}/Song.java Song.java
 	echo "Student version of Song.java has been renamed to: ${new_file}" 
@@ -54,10 +51,10 @@ fi
 echo "-------------------"
  
 # Cleanup grader files
-rm -Rf ${grader_file_path}
+rm -Rf "${grader_file_path}"
 
 echo "---------------------------------------"
-echo "Testing JukeboxHero.java (output below)"
+echo "Compiling JukeboxHero.java using javac"
 echo "---------------------------------------"
 
 javac JukeboxHero.java
@@ -65,6 +62,8 @@ if [ ! $? == 0 ] # Make sure the program built
 then
   echo "FAIL reason: JukeboxHero.java did not compile"
   exit 1
+else
+  echo "JukeboxHero.java compiled successfully"
 fi
 
 echo "--------------------------"
