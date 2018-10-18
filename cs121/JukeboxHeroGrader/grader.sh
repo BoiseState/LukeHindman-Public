@@ -120,7 +120,7 @@ fi
 echo "-->Expected: Number of Artists: 9"
 echo "-->Expected: Number of Albums: 112"
 echo "-->Expected: Number of Songs: 1125"
-echo "-->Expected: Catalog Playtime: 79:02:30"	
+echo "-->Expected: Catalog Playtime: 79:02:30 or Catalog Playtime: 284550"	
 	
 echo "--------------------------"
 echo "(A)nalyse test complete"
