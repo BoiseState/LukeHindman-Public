@@ -7,14 +7,17 @@ rm *.class > /dev/null 2>&1
 rm *.csv > /dev/null 2>&1
 rm *.zip > /dev/null 2>&1
 
+grader_file_path="tmp.$$"
+
 echo "---------------------------------"
 echo "Download and Unpack Support Files"
 echo "---------------------------------"
-if [ -e Song.java ];
+if [ -e Song.java -a ! -e Song.java.orig ];
 then
 	mv Song.java Song.java.orig
 fi
 
+cd ${grader_file_path}
 wget https://github.com/BoiseState/CS121-Public/raw/master/projects/p2-jukeboxhero/p2-jukeboxhero-support.zip
 
 if [ ! $? == 0 ];
@@ -30,7 +33,28 @@ then
 	exit 1
 fi
 
+cp *.csv ../
+cd ..
+
+echo "-------------------"
+echo "Testing Song.java"
+echo "-------------------"
+echo "Checking SongTest.java for changes..."
+diff -w -B Song.java ${grader_file_path}/Song.java
+if [ $? == 0 ]
+then
+        echo "Song.java matches original"
+else
+        echo "Song.java has been modified by the student. Replacing with original version"
+	new_file="Song.java.${USER}
+	mv Song.java ${new_file}
+	cp ${grader_file_path}/Song.java Song.java
+	echo "Student version of Song.java has been renamed to: ${new_file}" 
+fi
+echo "-------------------"
  
+# Cleanup grader files
+rm -Rf ${grader_file_path}
 
 echo "---------------------------------------"
 echo "Testing JukeboxHero.java (output below)"
