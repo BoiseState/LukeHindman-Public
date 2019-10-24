@@ -50,9 +50,10 @@ public class CSVParser {
 				System.exit(1);
 			}
 
-
-
-		}	
+		} else {
+			System.out.println("Unable to open file: " + bobsFile);
+			System.exit(1);
+		}
 
 
 	}
