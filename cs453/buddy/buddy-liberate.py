@@ -1,13 +1,9 @@
-# liberate - Return the specified block to the list of available blocks. As part 
+# liberate - Add the specified block to the list of available blocks. As part 
 #     of the liberation process, check the block's buddy to see if it can be 
 #     combined with the current block.  If so, combine them, then recursively 
 #     call liberate.
 # @param block The block to be liberated
 def liberate(block):
-	# Stop liberating once we have reached the top of the pool
-	if (block->kval == pool.lgsize):
-		add_block(block)
-		return
 	# S1 - Check if buddy is available
     buddy = get_buddy(block)
 	if (is_avail(buddy)):
@@ -17,5 +13,6 @@ def liberate(block):
 		liberate(merged)
 	else:
 		# S3 - Add the block to the list of available blocks
+		block->tag = FREE
 		add_block(block)
 

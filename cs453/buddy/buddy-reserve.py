@@ -1,7 +1,7 @@
-# reserve - finds and reserves a block of 2^k locations, or reports failure, using the
+# reserve - finds and reserves a block of 2^k bytes, or reports failure, using the
 # organization of the buddy system as described in Kunth
 # @param size The size in bytes requested
-# @return The offset in size_t from the start of the pool
+# @return pointer to reserved block matching request or None
 def reserve(size):
 	k = get_upper_k(size + sizeof(struct block_header))
 	m = pool.lgsize
