@@ -7,10 +7,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class ButtonCounterPanel extends JPanel {
+public class ButtonCounterPanelV2 extends JPanel {
 
 	
-	public ButtonCounterPanel(int numCounters) {
+	public ButtonCounterPanelV2(int numCounters) {
 //		BobButton b0 = new BobButton();
 //		BobButton b1 = new BobButton();
 //		BobButton b2 = new BobButton();

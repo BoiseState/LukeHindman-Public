@@ -6,7 +6,7 @@ public class ButtonCounter {
 		JFrame frame = new JFrame("Button Counter");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frame.getContentPane().add(new ButtonCounterPanel(512));
+		frame.getContentPane().add(new ButtonCounterPanelV1());
 		
 		frame.pack();
 		frame.setVisible(true);
