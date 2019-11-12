@@ -29,6 +29,7 @@ public class FileReaderPanel extends JPanel
 	{
 		openFileButton = new JButton("Select File");
 		openFileButton.addActionListener(new ButtonActionListener());
+		openFileButton.setToolTipText("Click here to select a file...");
 		
 		filePreview = new JTextArea(20, 30);
 		filePreview.setEditable(false);
@@ -36,7 +37,7 @@ public class FileReaderPanel extends JPanel
 		filePreview.setText("Please select a file to open");
 		
 		JScrollPane scrollPane = new JScrollPane(filePreview);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		add(scrollPane);
@@ -63,14 +64,14 @@ public class FileReaderPanel extends JPanel
 				// Read the contents of the file and display.
 				// We don't have to read the contents, we could just pass the
 				// File along.
-				filePreview.setText(null);
+				String bookText = "";
 				try {
 					Scanner scan = new Scanner(file);
-					while (scan.hasNext()) {
-						String line = scan.nextLine() + "\n";
-						filePreview.append(line);
+					while (scan.hasNextLine()) {
+						bookText += scan.nextLine() + "\n";
 					}
 					scan.close();
+					filePreview.setText(bookText);
 				} catch(FileNotFoundException e) {
 					filePreview.setText("Could not open file: " + file.getPath());
 				}
