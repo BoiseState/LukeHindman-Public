@@ -72,4 +72,4 @@ do
 done
 
 cd ${moss_path}
-moss -l c ${base_files} -d ${user_files}
+moss -l java ${base_files} -d ${user_files}
