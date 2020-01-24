@@ -22,7 +22,7 @@ public class ScannerFun {
 		age = Integer.parseInt(kbd.nextLine());
 		
 		System.out.println("Wow! " + age + " is a great age!");
-		System.out.println("That means you were born in " + (2018 - age));
+		System.out.println("That means you were born in " + (2020 - age));
 		
 		kbd.close();
 	}
