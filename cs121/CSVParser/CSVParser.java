@@ -33,7 +33,7 @@ public class CSVParser {
 					String artist = bobsLineScanner.next();
 					String album = bobsLineScanner.next();
 					String title = bobsLineScanner.next();
-					String duration = bobsLineScanner.next();
+					int duration = bobsLineScanner.nextInt();
 
 					/* 7. Print each song */
 					System.out.println("**************************");
