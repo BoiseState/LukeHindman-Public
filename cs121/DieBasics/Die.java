@@ -5,7 +5,7 @@ import java.util.Random;
  * @author lhindman
  *
  */
-public class Die {
+public class Die implements Comparable<Die>{
 	/* Step 1 - Instance Variables */
 	private int faceValue;
 	private int numSides;
@@ -60,5 +60,8 @@ public class Die {
 		return output;
 	}
 	
-	
+	@Override
+	public int compareTo(Die that) {
+		return this.getFaceValue() - that.getFaceValue();
+	}
 }
